@@ -33,13 +33,18 @@ int main()
 
 	sf::Text testText;
 	testText.setFont(AssetManager::GetFont("fonts/mainFont.ttf"));
-	testText.setString("testText");
+	testText.setString("abcdefghijklmnopqrstuvwxyz 1234567890");
 
 	//Testing animation
 	Animation testAnimation;
 	testAnimation.SetSprite(testsprite);
 	testAnimation.AddFrame(AssetManager::GetTexture("graphics/playerRun1.png"));
 	testAnimation.AddFrame(AssetManager::GetTexture("graphics/playerRun2.png"));
+
+	testAnimation.Play();
+	testAnimation.SetLoop(true);
+	testAnimation.SetPlayBackSpeed(4.0f);
+
 	// end game setup
 	// --------------------------------------
 
