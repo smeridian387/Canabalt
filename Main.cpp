@@ -3,6 +3,7 @@
 // --------------------------------------
 // Libraries
 #include <SFML/Graphics.hpp>
+#include "AssetManager.h"
 
 
 
@@ -14,12 +15,25 @@ int main()
 
 	// Render Window creation
 	sf::RenderWindow gameWindow;
-	gameWindow.create(sf::VideoMode::getDesktopMode(), "Whack A Critter",
+	gameWindow.create(sf::VideoMode::getDesktopMode(), "Canabalt",
 		sf::Style::Titlebar | sf::Style::Close);
 
 	// Timer functionality
 	sf::Clock gameClock;
 
+	AssetManager asset;
+
+
+	sf::Sprite testsprite;
+	testsprite.setTexture(AssetManager::GetTexture("graphics/playerjump.png"));
+
+	sf::Sound testSound;
+	testSound.setBuffer(AssetManager::GetSoundBuffer("audio/jump.WAV"));
+	testSound.play();
+
+	sf::Text testText;
+	testText.setFont(AssetManager::GetFont("fonts/mainFont.ttf"));
+	testText.setString("testText");
 	// end game setup
 	// --------------------------------------
 
@@ -63,8 +77,8 @@ int main()
 		gameWindow.clear();
 
 		// Draw Everything
-
-
+		gameWindow.draw(testsprite);
+		gameWindow.draw(testText);
 		// Display the window contents to the screen
 		gameWindow.display();
 
