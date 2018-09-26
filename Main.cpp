@@ -4,7 +4,7 @@
 // Libraries
 #include <SFML/Graphics.hpp>
 #include "AssetManager.h"
-
+#include "Animation.h"
 
 
 int main()
@@ -34,6 +34,12 @@ int main()
 	sf::Text testText;
 	testText.setFont(AssetManager::GetFont("fonts/mainFont.ttf"));
 	testText.setString("testText");
+
+	//Testing animation
+	Animation testAnimation;
+	testAnimation.SetSprite(testsprite);
+	testAnimation.AddFrame(AssetManager::GetTexture("graphics/playerRun1.png"));
+	testAnimation.AddFrame(AssetManager::GetTexture("graphics/playerRun2.png"));
 	// end game setup
 	// --------------------------------------
 
@@ -64,6 +70,7 @@ int main()
 		// --------------------------------------
 		sf::Time frameTime = gameClock.restart();
 
+		testAnimation.Update(frameTime);
 		// end update
 		// --------------------------------------
 
