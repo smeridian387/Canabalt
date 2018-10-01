@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "AssetManager.h"
 #include "Animation.h"
+#include "AnimationSystem.h"
 
 
 int main()
@@ -24,8 +25,8 @@ int main()
 	AssetManager asset;
 
 
-	sf::Sprite testsprite;
-	testsprite.setTexture(AssetManager::GetTexture("graphics/playerjump.png"));
+	sf::Sprite testSprite;
+	testSprite.setTexture(AssetManager::GetTexture("graphics/playerjump.png"));
 
 	sf::Sound testSound;
 	testSound.setBuffer(AssetManager::GetSoundBuffer("audio/jump.WAV"));
@@ -36,14 +37,21 @@ int main()
 	testText.setString("abcdefghijklmnopqrstuvwxyz 1234567890");
 
 	//Testing animation
-	Animation testAnimation;
-	testAnimation.SetSprite(testsprite);
+	AnimationSystem testAnimationSystem;
+	testAnimationSystem.SetSprite(testSprite);
+
+	
+	Animation& testAnimation = testAnimationSystem.CreateAnimation("run");
 	testAnimation.AddFrame(AssetManager::GetTexture("graphics/playerRun1.png"));
 	testAnimation.AddFrame(AssetManager::GetTexture("graphics/playerRun2.png"));
 
 	testAnimation.Play();
 	testAnimation.SetLoop(true);
 	testAnimation.SetPlayBackSpeed(4.0f);
+
+	Animation& jumpAnimation = testAnimationSystem.CreateAnimation("jump");
+	jumpAnimation.AddFrame(AssetManager::GetTexture("graphics/playerjump.png"));
+	testAnimationSystem.Play("run");
 
 	// end game setup
 	// --------------------------------------
@@ -89,7 +97,7 @@ int main()
 		gameWindow.clear();
 
 		// Draw Everything
-		gameWindow.draw(testsprite);
+		gameWindow.draw(testSprite);
 		gameWindow.draw(testText);
 		// Display the window contents to the screen
 		gameWindow.display();
