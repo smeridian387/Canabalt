@@ -6,7 +6,7 @@
 AnimationSystem::AnimationSystem()
 	: m_sprite(nullptr)
 	, m_animations()
-	, m_currenyAnimation(nullptr)
+	, m_currentAnimation(nullptr)
 {
 
 
